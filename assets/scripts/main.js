@@ -5,6 +5,7 @@ var volumeinput = document.getElementById("volume-number");
 volumeinput.addEventListener('change', changeVolume);
 
 function changeVolume(e) {
+  var honk = document.getElementById("honk-btn");
   var aud = document.getElementById("horn-sound");
   aud.volume = e.target.valueAsNumber / 100;
   var slider = document.getElementById("volume-slider");
@@ -12,15 +13,19 @@ function changeVolume(e) {
   var image = document.getElementById("volume-image");
   if ((aud.volume >= .66) && (aud.volume <= 1)) {
     image.src = "assets\\media\\icons\\volume-level-3.svg";
+    honk.disabled = false;
   }
   if ((aud.volume >= .34) && (aud.volume <= .66)) {
     image.src = "assets\\media\\icons\\volume-level-2.svg";
+    honk.disabled = false;
   }
   if ((aud.volume >= .01) && (aud.volume <= .33)) {
     image.src = "assets\\media\\icons\\volume-level-1.svg";
+    honk.disabled = false;
   }
   if (aud.volume == 0.0) {
     image.src = "assets\\media\\icons\\volume-level-0.svg";
+    honk.disabled = true;
   }
 }
 
@@ -30,6 +35,7 @@ var volumeslider = document.getElementById("volume-slider");
 volumeslider.addEventListener('change', changeVolumeAgain);
 
 function changeVolumeAgain(e) {
+  var honk = document.getElementById("honk-btn");
   var aud = document.getElementById("horn-sound");
   aud.volume = e.target.valueAsNumber / 100;
   var input = document.getElementById("volume-number");
@@ -37,15 +43,19 @@ function changeVolumeAgain(e) {
   var image = document.getElementById("volume-image");
   if ((aud.volume >= .66) && (aud.volume <= 1)) {
     image.src = "assets\\media\\icons\\volume-level-3.svg";
+    honk.disabled = false;
   }
   if ((aud.volume >= .34) && (aud.volume <= .66)) {
     image.src = "assets\\media\\icons\\volume-level-2.svg";
+    honk.disabled = false;
   }
   if ((aud.volume >= .01) && (aud.volume <= .33)) {
     image.src = "assets\\media\\icons\\volume-level-1.svg";
+    honk.disabled = false;
   }
   if (aud.volume == 0.0) {
     image.src = "assets\\media\\icons\\volume-level-0.svg";
+    honk.disabled = true;
   }
 }
 
@@ -77,17 +87,14 @@ function changeSound(e) {
 // honk button
 var honk = document.getElementById("honk-btn");
 var aud = document.getElementById("horn-sound");
-honk.type = "button";
-if (aud.volume == 0.0) {
-  honk.disabled = true;
-}
-else {
-  honk.disabled = false;
-}
+var inp = document.getElementById("volume-number");
+var slid = document.getElementById("volume-slider");
+
+
 honk.addEventListener('click', playSound);
 
 function playSound(e) {
+  e.target.type = "button";
   var aud = document.getElementById("horn-sound");
   aud.play();
-  alert("yeee");
 }
